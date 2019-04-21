@@ -20,4 +20,19 @@ contract TestAdoption {
 
     Assert.equal(returnedId, expectedPetId, "Adoption of expected pet should match return");
   }
+
+  // Testing retrieval of single pet's owner
+  function testGetAdopterAddressByPetId() public {
+    address adopter = adoption.adopters(expectedPetId);
+
+    Assert.equal(adopter, expectedAdopter, "Owner of the expected pet should be this contract");
+  }
+
+  // Testing retrieval of all pet owners
+  function testGetAdopterAddresByPetIdInArray() public {
+    // Store adopter in memory
+    address[16] memory adopters = adoption.getAdopters();
+
+    Assert.equal(adopters[expectedPetId], expectedAdopter, "Owner of the expected pet should be this contract");
+  }
 }
